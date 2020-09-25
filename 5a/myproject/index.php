@@ -1,31 +1,6 @@
 <?php session_start();
 require_once('dbconnection.php');
 
-//Code for Registration 
-if(isset($_POST['signup']))
-{
-	$fname=$_POST['fname'];
-	$lname=$_POST['lname'];
-	$email=$_POST['email'];
-	$username=$_POST['username'];
-	$password=$_POST['password'];
-	$contact=$_POST['contact'];
-	$enc_password=$password;
-$sql=mysqli_query($con,"select id from users where username='$username'");
-$row=mysqli_num_rows($sql);
-if($row>0)
-{
-	echo "<script>alert('Tên đăng nhập đã được tạo. Hãy chọn tên đăng nhập khác');</script>";
-} else{
-	$msg=mysqli_query($con,"insert into users(fname,lname,email,password,contactno,username,position) values('$fname','$lname','$email','$enc_password','$contact','$username','Student')");
-
-if($msg)
-{
-	echo "<script>alert('Đăng kí thành công');</script>";
-}
-}
-}
-
 // Code for login 
 if(isset($_POST['login']))
 {
@@ -56,7 +31,6 @@ exit();
 }
 }
 
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -80,45 +54,15 @@ exit();
 </head>
 <body>
 <div class="main">
-		<h1>ĐĂNG NHẬP VÀ ĐĂNG KÍ</h1>
+		<h1>ĐĂNG NHẬP SINH VIÊN</h1>
 	 <div class="sap_tabs">	
 			<div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
 			  <ul class="resp-tabs-list">
-			  	  <li class="resp-tab-item" aria-controls="tab_item-0" role="tab" style="width: 50%;"><div class="top-img"><img src="images/top-note.png" alt=""/></div><span>ĐĂNG KÍ</span>
-			  	  	
-				</li>
-				  <li class="resp-tab-item" aria-controls="tab_item-1" role="tab" style="width: 50%;"><div class="top-img" ><img src="images/top-lock.png" alt=""/></div><span>ĐĂNG NHẬP</span></li>
+				  <li class="resp-tab-item" aria-controls="tab_item-1" role="tab" style="width: 100%;"><div class="top-img" ><img src="images/top-lock.png" alt=""/></div><span>ĐĂNG NHẬP</span></li>
 				  <div class="clear"></div>
 			  </ul>		
 			  	 
-			<div class="resp-tabs-container">
-					<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
-					<div class="facts">
-					
-						<div class="register">
-							<form name="registration" method="post" action="" enctype="multipart/form-data">
-								<p>Tên  </p>
-								<input type="text" class="text" value=""  name="fname" required >
-								<p>Họ </p>
-								<input type="text" class="text" value="" name="lname"  required >
-								<p>Tên Đăng Nhập</p>
-								<input type="text" class="text" value=""  name="username" required >
-								<p>Mật Khẩu </p>
-								<input type="password" value="" name="password" required>
-								<p>Địa Chỉ Email</p>
-								<input type="text" class="text" value="" name="email"  >
-								<p>Số Điện Thoại </p>
-								<input type="text" value="" name="contact"  required>
-								<div class="sign-up">
-									<input type="reset" value="Làm Mới">
-									<input type="submit" name="signup"  value="Đăng Kí" >
-									<div class="clear"> </div>
-								</div>
-							</form>
-
-						</div>
-					</div>
-				</div>		
+			<div class="resp-tabs-container">	
 			 <div class="tab-2 resp-tab-content" aria-labelledby="tab_item-1">
 					 	<div class="facts">
 							<div class="login">

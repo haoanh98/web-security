@@ -133,6 +133,12 @@ return true;
                           <span> Bài Tập </span>
                       </a> 
                   </li>
+                  <li class="sub-menu">
+                      <a href="challenge.php" >
+                          <i class="fa fa-tags"></i>
+                          <span> Giải Đố </span>
+                      </a> 
+                  </li>
               
                  
               </ul>

@@ -80,6 +80,13 @@ echo "<script>alert('Cập Nhật Thành Công');</script>";
                           <span> Bài Tập </span>
                       </a> 
                   </li>
+
+                  <li class="sub-menu">
+                      <a href="challenge.php" >
+                          <i class="fa fa-tags"></i>
+                          <span> Giải Đố </span>
+                      </a> 
+                  </li>
               </ul>
           </div>
       </aside>

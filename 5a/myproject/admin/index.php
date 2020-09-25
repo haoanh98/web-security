@@ -6,7 +6,7 @@ include("dbconnection.php");
 if(isset($_POST['login']))
 {
   $adminusername=$_POST['username'];
-  $pass=$_POST['password'];
+  $pass=md5($_POST['password']);
 $ret=mysqli_query($con,"SELECT * FROM users WHERE username='$adminusername' and password ='$pass' and position = 'Teacher'");
 $num=mysqli_fetch_array($ret);
 if($num>0)

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th9 24, 2020 lúc 05:01 PM
+-- Thời gian đã tạo: Th9 25, 2020 lúc 05:45 PM
 -- Phiên bản máy phục vụ: 10.4.14-MariaDB
 -- Phiên bản PHP: 7.2.33
 
@@ -24,6 +24,24 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `challenge`
+--
+
+CREATE TABLE `challenge` (
+  `id` int(11) NOT NULL,
+  `suggest` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `challenge`
+--
+
+INSERT INTO `challenge` (`id`, `suggest`) VALUES
+(8, 'Bài hát gì?');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `message`
 --
 
@@ -39,13 +57,8 @@ CREATE TABLE `message` (
 --
 
 INSERT INTO `message` (`id`, `id_1`, `id_2`, `text`) VALUES
-(12, 2, 1, 'iiiiii'),
-(13, 2, 1, 'sao thế'),
-(15, 1, 2, 'haaaaaa'),
-(16, 2, 3, 'ê'),
-(17, 3, 2, 'j'),
-(18, 1, 2, 'hào'),
-(20, 1, 2, 'alo');
+(24, 1, 13, 'ê'),
+(25, 13, 1, 'hello');
 
 -- --------------------------------------------------------
 
@@ -66,12 +79,8 @@ CREATE TABLE `upload` (
 --
 
 INSERT INTO `upload` (`id`, `link`, `ex`, `type`, `users`) VALUES
-(5, 'Báo cáo AI.docx', '', 0, 'Phương'),
-(9, 'Chuong1_CacKhaiNiemCoBan2.pdf', '', 0, 'Huấn'),
-(11, 'Chuong2.pdf', '', 0, 'Phương'),
-(12, 'Chuong3.pdf', '', 0, 'Phương'),
-(13, 'Chuong6.pdf', '5', 1, 'Anh Hào'),
-(14, 'Chuong5.pdf', '9', 1, 'Anh Hào');
+(17, '1. Combin00_Intro.pdf', '', 0, 'Phương'),
+(18, 'Báo cáo AI.docx', '17', 1, 'Anh Hào');
 
 -- --------------------------------------------------------
 
@@ -95,15 +104,19 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `fname`, `lname`, `username`, `password`, `email`, `contactno`, `position`) VALUES
-(1, 'Phương', 'Kiều', 'admin', '123456', 'phuongktn@gmail.com', '123456789', 'Teacher'),
-(2, 'Anh Hào', 'Lê', 'hocsinh1', '111111', 'haotwentynine@gmail.com', '0337468877', 'Student'),
-(3, 'Tiến Dũng', 'Nguyễn', 'hocsinh2', '123456', 'dungnt@gmail.com', '12345678', 'Student'),
-(4, 'Huấn', 'Lê', 'admin2', '123456', 'huanle@gmail.com', '0123456789', 'Teacher'),
-(9, 'Đức Phi', 'Bùi', 'hocsinh3', '123456', 'phibd@gmail.com', '2311313131', 'Student');
+(1, 'Phương', 'Kiều', 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'phuongktn@gmail.com', '1234567890', 'Teacher'),
+(13, 'Anh Hào', 'Lê', 'sinhvien1', '123456', 'haola1@gmail.com', '0337468877', 'Student'),
+(14, 'Đức Phi', 'Bùi', 'sinhvien2', '123456', 'phibd@gmail.com', '2311313131', 'Student');
 
 --
 -- Chỉ mục cho các bảng đã đổ
 --
+
+--
+-- Chỉ mục cho bảng `challenge`
+--
+ALTER TABLE `challenge`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Chỉ mục cho bảng `message`
@@ -128,22 +141,28 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT cho bảng `challenge`
+--
+ALTER TABLE `challenge`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT cho bảng `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT cho bảng `upload`
 --
 ALTER TABLE `upload`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

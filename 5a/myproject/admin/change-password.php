@@ -11,12 +11,12 @@ if (strlen($_SESSION['id']==0)) {
 if(isset($_POST['Submit']))
 {
 $usersid=$_SESSION['id'];
-$oldpassword=$_POST['oldpass'];
+$oldpassword=md5($_POST['oldpass']);
 $sql=mysqli_query($con,"SELECT password FROM users where password='$oldpassword' and id='$usersid' ");
 $num=mysqli_fetch_array($sql);
 if($num>0)
 {
-$newpass=$_POST['newpass'];
+$newpass=md5($_POST['newpass']);
 $ret=mysqli_query($con,"update users set password='$newpass' where id='$usersid'");
 $_SESSION['msg']="Thay Đổi Mật Khảu Thành Công !!";
 //header('location:user.php');
@@ -132,6 +132,13 @@ return true;
                       <a href="ex.php" >
                           <i class="fa fa-tag"></i>
                           <span> Bài Tập </span>
+                      </a> 
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="challenge.php" >
+                          <i class="fa fa-tags"></i>
+                          <span> Giải Đố </span>
                       </a> 
                   </li>
                  

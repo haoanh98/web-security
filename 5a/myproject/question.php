@@ -1,28 +1,35 @@
 <?php
 session_start();
 include'dbconnection.php';
-//Checking session is valid or not
+// checking session is valid for not 
 if (strlen($_SESSION['id']==0)) {
   header('location:logout.php');
   } else{
 
-// for updating user info    
-if(isset($_POST['Submit']))
-{
-	$fname=$_POST['fname'];
-    $lname=$_POST['lname'];
-    $email=$_POST['email'];
-    $contact=$_POST['contact'];
-    $uid=intval($_SESSION['id']);
-$query=mysqli_query($con,"update users set fname='$fname' ,lname='$lname' ,email='$email' ,contactno='$contact'  where id='$uid'");
-echo "<script>alert('Cập Nhật Thành Công');</script>";
-}
-?>
 
-<!DOCTYPE html>
-<html lang="vi">
+
+if(isset($_POST['Submit']) and ($_POST['answer']!="")){
+    $path = 'admin/challenge/'.$_GET['id'];
+    foreach (new DirectoryIterator($path) as $fileInfo) {
+        $a=$fileInfo->getFilename();
+    }
+    $b=substr($a,0,strlen($a)-4);
+    if ($b==$_POST['answer'])
+    {
+        $extra='view-answer.php?link='.$path.'/'.$a;
+        $host=$_SERVER['HTTP_HOST'];
+        $uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+        header("location:http://$host$uri/$extra");
+    }
+    else{
+        echo "<script>alert('ĐÁP ÁN KHÔNG CHÍNH XÁC');</script>";
+    }
+    }
+
+?><!DOCTYPE html>
+<html lang="en">
   <head>
-    <title>Sinh Viên | Cập Nhật Thông Tin </title>
+    <title>SINH VIÊN | GIẢI ĐỐ </title>
     <link href="admin/assets/css/bootstrap.css" rel="stylesheet">
     <link href="admin/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="admin/assets/css/style.css" rel="stylesheet">
@@ -36,7 +43,7 @@ echo "<script>alert('Cập Nhật Thành Công');</script>";
               <div class="sidebar-toggle-box">
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
-            <a href="#" class="logo"><b>Hệ Thống Sinh Viên</b></a>
+            <a href="#" class="logo"><b>HỆ THỐNG GIẢNG VIÊN</b></a>
             <div class="nav notify-row" id="top_menu">
                
                          
@@ -55,19 +62,19 @@ echo "<script>alert('Cập Nhật Thành Công');</script>";
               
               	  <p class="centered"><a href="#"><img src="admin/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
               	  <h5 class="centered"><?php echo $_SESSION['name'];?></h5>
-                    	
+              	  	
                   <li class="mt">
                       <a href="change-password.php">
                           <i class="fa fa-key"></i>
-                          <span> Thay Đổi Mật Khẩu </span>
+                          <span>Thay Đổi Mật Khẩu</span>
                       </a>
                   </li>
 
                   <li class="sub-menu">
                       <a href="view-details.php" >
                           <i class="fa fa-users"></i>
-                          <span> Thông Tin Người Dùng </span>
-                      </a>
+                          <span>Thông Tin Người Dùng</span>
+                      </a> 
                   </li>
 
                   <li class="sub-menu">
@@ -76,71 +83,64 @@ echo "<script>alert('Cập Nhật Thành Công');</script>";
                           <span> Cập Nhật Thông Tin </span>
                       </a> 
                   </li>
-              
+                  
                   <li class="sub-menu">
                       <a href="ex.php" >
                           <i class="fa fa-tag"></i>
                           <span> Bài Tập </span>
                       </a> 
                   </li>
+
                   <li class="sub-menu">
                       <a href="challenge.php" >
                           <i class="fa fa-tags"></i>
                           <span> Giải Đố </span>
                       </a> 
                   </li>
+
               </ul>
           </div>
       </aside>
-      <?php $ret=mysqli_query($con,"select * from users where id='".$_SESSION['id']."'");
-	  while($row=mysqli_fetch_array($ret))
-	  
-	  {?>
       <section id="main-content">
           <section class="wrapper">
-          	<h3><i class="fa fa-star"></i> Thông Tin của <?php echo $row['fname'];?></h3>
-             	
-				<div class="row">
-				
-                  
-	                  
+          <h3><i class="fa fa-star"></i> Câu Hỏi Đố Vui </h3>
+          <?php $ret=mysqli_query($con,"select * from challenge where id='".$_GET['id']."'");
+            while($row=mysqli_fetch_array($ret))
+                {?>
+				<div class="row">     
+                  <div class="col-md-12">
+                      <div class="content-panel">
+                      <form class="form-horizontal style-form" name="form1" method="post" action="" onSubmit="return valid();">
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label" style="padding-left:40px;"> CÂU HỎI </label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" name="question" value="<?php echo $row['suggest'];?>" readonly>
+                              </div>
+                          </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+              <?php } ?>
+              <div class="row">  
                   <div class="col-md-12">
                       <div class="content-panel">
                            <form class="form-horizontal style-form" name="form1" method="post" action="" onSubmit="return valid();">
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label" style="padding-left:40px;"> Tên </label>
+                              <label class="col-sm-2 col-sm-2 control-label" style="padding-left:40px;"> ĐÁP ÁN CỦA BẠN </label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control" name="fname" value="<?php echo $row['fname'];?>" >
-                              </div>
-                          </div>
-                          
-                              <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label" style="padding-left:40px;"> Họ </label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" name="lname" value="<?php echo $row['lname'];?>" >
-                              </div>
-                          </div>
-                              <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label" style="padding-left:40px;"> Địa Chỉ Email </label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" name="email" value="<?php echo $row['email'];?>" >
-                              </div>
-                          </div>
-                               <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label" style="padding-left:40px;"> Số Điện Thoại </label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" name="contact" value="<?php echo $row['contactno'];?>" >
+                                  <input type="text" class="form-control" name="answer" value="" >
                               </div>
                           </div>
                           <div style="margin-left:100px;">
-                          <input type="submit" name="Submit" value="Cập Nhật" class="btn btn-theme"></div>
+                          <input type="submit" name="Submit" value="TRẢ LỜI" class="btn btn-theme"></div>
                           </form>
                       </div>
                   </div>
               </div>
 		</section>
-        <?php } ?>
-      </section></section>
+      </section
+  ></section>
     <script src="admin/assets/js/jquery.js"></script>
     <script src="admin/assets/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="admin/assets/js/jquery.dcjqaccordion.2.7.js"></script>

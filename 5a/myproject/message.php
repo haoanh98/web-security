@@ -95,6 +95,12 @@ if($msg)
                           <span> Bài Tập </span>
                       </a> 
                   </li>
+                  <li class="sub-menu">
+                      <a href="challenge.php" >
+                          <i class="fa fa-tags"></i>
+                          <span> Giải Đố </span>
+                      </a> 
+                  </li>
                  
               </ul>
           </div>
@@ -109,7 +115,7 @@ if($msg)
                   <div class="col-md-12">
                       <div class="content-panel">
                           <table class="table table-striped table-advance table-hover">
-	                  	  	  <h4><i class="fa fa-angle-right"></i> Tin nhắn đến </h4>
+	                  	  	  <h4><i class="fa fa-angle-right"></i> Danh Sách Tin Nhắn </h4>
 	                  	  	  <hr>
                               <thead>
                               <tr>

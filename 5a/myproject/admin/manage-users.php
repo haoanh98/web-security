@@ -111,6 +111,13 @@ if($msg)
                       </a> 
                   </li>
 
+                  <li class="sub-menu">
+                      <a href="challenge.php" >
+                          <i class="fa fa-tags"></i>
+                          <span> Giải Đố </span>
+                      </a> 
+                  </li>
+
               </ul>
           </div>
       </aside>
@@ -118,9 +125,6 @@ if($msg)
           <section class="wrapper">
           	<h3><i class="fa fa-star"></i> Thông Tin Người Dùng </h3>
 				<div class="row">
-				
-                  
-	                  
                   <div class="col-md-12">
                       <div class="content-panel">
                           <table class="table table-striped table-advance table-hover">
@@ -132,7 +136,6 @@ if($msg)
                                   <th class="hidden-phone">Tên</th>
                                   <th> Họ </th>
                                   <th> Tên Đăng Nhập</th>
-                                  <th> Mật Khẩu </th>
                                   <th> Địa Chỉ Email </th>
                                   <th> Số Điện Thoại</th>
                               </tr>
@@ -147,7 +150,6 @@ if($msg)
                                   <td><?php echo $row['fname'];?></td>
                                   <td><?php echo $row['lname'];?></td>
                                   <td><?php echo $row['username'];?></td>
-                                  <td><?php echo $row['password'];?></td>
                                   <td><?php echo $row['email'];?></td>
                                   <td><?php echo $row['contactno'];?></td>  
                                   <td>
@@ -157,7 +159,7 @@ if($msg)
                                      <a href="manage-users.php?id=<?php echo $row['id'];?>"> 
                                      <button class="btn btn-danger btn-xs" onClick="return confirm('Bạn Có Muốn Xóa Không?');"><i class="fa fa-trash-o "></i></button></a>
                                   
-                                     <a href="message.php?id=<?php echo $row['id'];$_SESSION['receiver'] = $row['id'];?>"> 
+                                     <a href="message.php?id=<?php echo $row['id'];?>"> 
                                      <button class="btn btn-primary btn-xs"><i class="fa fa-envelope-o"></i></button></a>
 
                                   </td>
@@ -166,7 +168,6 @@ if($msg)
                              
                               </tbody>
                           </table>
-
                           <table class="table table-striped table-advance table-hover">
 	                  	  	  <h4><i class="fa fa-angle-right"></i> Danh Sách Giảng Viên </h4>
 	                  	  	  <hr>
@@ -233,7 +234,7 @@ if($msg)
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label" style="padding-left:40px;"> Mật Khẩu </label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="password" value="" >
+                                            <input type="password" class="form-control" name="password" value="" >
                                         </div>
                                     </div>
                                         <div class="form-group">

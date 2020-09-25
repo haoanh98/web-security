@@ -10,11 +10,11 @@ if (strlen($_SESSION['id']==0)) {
 ?><!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>GIẢNG VIÊN | BÀI TẬP </title>
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/style-responsive.css" rel="stylesheet">
+    <title>SINH VIÊN | GIẢI ĐỐ </title>
+    <link href="admin/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="admin/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="admin/assets/css/style.css" rel="stylesheet">
+    <link href="admin/assets/css/style-responsive.css" rel="stylesheet">
   </head>
 
   <body>
@@ -41,7 +41,7 @@ if (strlen($_SESSION['id']==0)) {
           <div id="sidebar"  class="nav-collapse ">
               <ul class="sidebar-menu" id="nav-accordion">
               
-              	  <p class="centered"><a href="#"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+              	  <p class="centered"><a href="#"><img src="admin/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
               	  <h5 class="centered"><?php echo $_SESSION['name'];?></h5>
               	  	
                   <li class="mt">
@@ -52,14 +52,14 @@ if (strlen($_SESSION['id']==0)) {
                   </li>
 
                   <li class="sub-menu">
-                      <a href="manage-users.php" >
+                      <a href="view-details.php" >
                           <i class="fa fa-users"></i>
                           <span>Thông Tin Người Dùng</span>
                       </a> 
                   </li>
 
                   <li class="sub-menu">
-                      <a href="update.php" >
+                      <a href="update-profile.php" >
                           <i class="fa fa-file"></i>
                           <span> Cập Nhật Thông Tin </span>
                       </a> 
@@ -84,48 +84,24 @@ if (strlen($_SESSION['id']==0)) {
       </aside>
       <section id="main-content">
           <section class="wrapper">
-              <h3><i class="fa fa-star"></i> Bài Tập </h3>
-              <div class="row">
-	                  
-                  <div class="col-md-12">
-                      <div class="content-panel">
-                          <table class="table table-striped table-advance table-hover">
-	                  	  	  <h4><i class="fa fa-angle-right"></i> Danh Sách Sinh Viên Đã Hoàn Thành Bài Tập </h4>
-	                  	  	  <hr>
-                              <thead>
-                              <tr>
-                                  <th class="hidden-phone">File </th>
-                                  <th> Sinh Viên </th>
-                              </tr>
-                              </thead>
-                              <tbody>
-                              <?php $ret=mysqli_query($con,"select * from upload where type = '1' and ex ='".$_GET['id']."'");
-							  while($row=mysqli_fetch_array($ret))
-							  {?>
-                              <tr>
-                                  <td><?php echo $row['link'];?></td>
-                                  <td><?php echo $row['users'];?></td>
-                                  <td>
-                                     <a href="upload/<?php echo $row['link'];?>"> 
-                                     <button class="btn btn-primary btn-xs"><i class="fa fa-download"></i></button></a>
-                                  </td>
-                              </tr>
-                              <?php }?>
-                             
-                              </tbody>
-                          </table>
-                      </div>
-                  </div>
-              </div>
+          <h3><i class="fa fa-check-square-o"></i> ĐÁP ÁN CHÍNH XÁC </h3>
+          <br>
+          <?php
+            $read = file($_GET['link']);
+            foreach ($read as $line) {
+                ?>
+                <div style="margin-left:100px;"><?php echo $line ;?></div>
+                <br>
+           <?php  } ?>
 		</section>
-      </section
-  ></section>
-    <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
-    <script src="assets/js/jquery.scrollTo.min.js"></script>
-    <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
-    <script src="assets/js/common-scripts.js"></script>
+      </section>
+      </section>
+    <script src="admin/assets/js/jquery.js"></script>
+    <script src="admin/assets/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="admin/assets/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="admin/assets/js/jquery.scrollTo.min.js"></script>
+    <script src="admin/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="admin/assets/js/common-scripts.js"></script>
   <script>
       $(function(){
           $('select.styled').customSelect();

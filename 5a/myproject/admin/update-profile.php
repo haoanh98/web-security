@@ -85,6 +85,13 @@ echo "<script>alert('Cập Nhật Thành Công');</script>";
                           <span> Bài Tập </span>
                       </a> 
                   </li>
+
+                  <li class="sub-menu">
+                      <a href="challenge.php" >
+                          <i class="fa fa-tags"></i>
+                          <span> Giải Đố </span>
+                      </a> 
+                  </li>
                  
               </ul>
           </div>
@@ -126,7 +133,7 @@ echo "<script>alert('Cập Nhật Thành Công');</script>";
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label" style="padding-left:40px;"> Mật Khẩu </label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control" name="password" value="<?php echo $row['password'];?>" >
+                                  <input type="password" class="form-control" name="password" value="<?php echo $row['password'];?>" >
                               </div>
                           </div>
                               <div class="form-group">

@@ -6,11 +6,10 @@ if (strlen($_SESSION['id']==0)) {
   header('location:logout.php');
   } else{
 
-
 ?><!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>GIẢNG VIÊN | BÀI TẬP </title>
+    <title>GIẢNG VIÊN | GIẢI ĐỐ </title>
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet">
@@ -84,61 +83,65 @@ if (strlen($_SESSION['id']==0)) {
       </aside>
       <section id="main-content">
           <section class="wrapper">
-              <h3><i class="fa fa-star"></i> Bài Tập </h3>
-              <div class="row">
+          	<h3><i class="fa fa-star"></i> Câu Hỏi Đố Vui </h3>
+				<div class="row">
+				
+                  
 	                  
                   <div class="col-md-12">
                       <div class="content-panel">
                           <table class="table table-striped table-advance table-hover">
-	                  	  	  <h4><i class="fa fa-angle-right"></i> Danh Sách Bài Tập </h4>
+	                  	  	  <h4><i class="fa fa-angle-right"></i> Danh Sách Câu Hỏi </h4>
 	                  	  	  <hr>
                               <thead>
                               <tr>
-                                  <th class="hidden-phone">File </th>
-                                  <th> Người Ra Đề </th>
+                                  <th> STT </th>
+                                  <th> Câu Hỏi </th>
                               </tr>
                               </thead>
                               <tbody>
-                              <?php $ret=mysqli_query($con,"select * from upload where type = '0'");
+                              <?php $ret=mysqli_query($con,"select * from challenge");
+							  $cnt=1;
 							  while($row=mysqli_fetch_array($ret))
 							  {?>
                               <tr>
-                                  <td><?php echo $row['link'];?></td>
-                                  <td><?php echo $row['users'];?></td>
-                                  <td>
-                                     <a href="upload/<?php echo $row['link'];?>"> 
-                                     <button class="btn btn-primary btn-xs"><i class="fa fa-download"></i></button></a>
-                                  </td>
-                                  <td>
-                                     <a href="list.php?id=<?php echo $row['id'];?>"> 
-                                     <button class="btn btn-primary btn-xs"><i class="fa fa-user"></i></button></a>
-                                  </td>
+                              <td><?php echo $cnt;?></td>
+                                  <td><?php echo $row['suggest'];?></td> 
                               </tr>
-                              <?php }?>
+                              <?php $cnt=$cnt+1; }?>
                              
                               </tbody>
                           </table>
-
-                          <h4><i class="fa fa-angle-right"></i> Upload File Bài Tập </h4>
+                          <h4><i class="fa fa-angle-right"></i> Tạo Câu Hỏi </h4>
                           <hr>
                           <div class="row">
 
                             <div class="col-md-12">
                                 <div class="content-panel">
-                                    <form class="form-horizontal style-form" name="form1" method="post" action="" enctype="multipart/form-data" onSubmit="return valid();">
+                                <form class="form-horizontal style-form" name="form1" method="post" action="" enctype="multipart/form-data" onSubmit="return valid();">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label" style="padding-left:40px;">Câu Hỏi </label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="suggest" value="" >
+                                        </div>
+                                    </div>
                                     <div style="margin-left:300px;">
                                     <input type="file" name="fileUpload" value="" class="btn btn-theme02" >
-                                    <input type="submit" name="up" value="Tải Bài Tập" class="btn btn-theme03" >
+                                    <input type="submit" name="up" value="Tải Đáp Án" class="btn btn-theme03" >
                                     <?php
-                                        if (isset($_POST['up']) && isset($_FILES['fileUpload'])) {
-                                            if ($_FILES['fileUpload']['error'] > 0) 
+                                        if (isset($_POST['up']) and isset($_FILES['fileUpload'])) {
+                                            $b = $_FILES['fileUpload']['name'];
+                                            $b=substr($b,strlen($b)-4,strlen($b));
+                                            if (($_FILES['fileUpload']['error'] > 0) or ($_POST['suggest']=="") or ($b!=".txt") )
                                                 echo "<script>alert('Lỗi..!');</script>";
                                             else {
-                                                move_uploaded_file($_FILES['fileUpload']['tmp_name'], 'upload/' . $_FILES['fileUpload']['name']);
-                                                $a=$_FILES['fileUpload']['name'];
-                                                $c=$_SESSION['name'];
-                                                $msg=mysqli_query($con,"insert into upload(link,users,type) values('$a','$c','0')");
-                                                echo "<script>alert('Thêm Bài Tập Thành Công');</script>";
+                                                $a=$_POST['suggest'];
+                                                $msg=mysqli_query($con,"insert into challenge(suggest) values('$a')");
+                                                $msg=mysqli_query($con,"select * from challenge where suggest = '$a'");
+                                                $b=mysqli_fetch_array($msg);
+                                                mkdir('challenge/'.$b['id']);
+                                                move_uploaded_file($_FILES['fileUpload']['tmp_name'], 'challenge/'.$b['id'].'/'. $_FILES['fileUpload']['name']);
+                                                echo "<script>alert('Thêm Câu Hỏi Thành Công');</script>";
                                             }
                                         }
                                     ?>
