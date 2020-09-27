@@ -6,6 +6,22 @@ if (strlen($_SESSION['id']==0)) {
   header('location:logout.php');
   } else{
 
+if (isset($_POST['up']) and isset($_FILES['fileUpload'])) {
+    $b = $_FILES['fileUpload']['name'];
+    $b=substr($b,strlen($b)-4,strlen($b));
+    if (($_FILES['fileUpload']['error'] > 0) or ($_POST['suggest']=="") or ($b!=".txt") )
+        echo "<script>alert('Lỗi..!');</script>";
+    else {
+        $a=$_POST['suggest'];
+        $msg=mysqli_query($con,"insert into challenge(suggest) values('$a')");
+        $msg=mysqli_query($con,"select * from challenge where suggest = '$a'");
+        $b=mysqli_fetch_array($msg);
+        mkdir('challenge/'.$b['id']);
+        move_uploaded_file($_FILES['fileUpload']['tmp_name'], 'challenge/'.$b['id'].'/'. $_FILES['fileUpload']['name']);
+        echo "<script>alert('Thêm Câu Hỏi Thành Công');</script>";
+    }
+}
+
 ?><!DOCTYPE html>
 <html lang="en">
   <head>
@@ -128,23 +144,6 @@ if (strlen($_SESSION['id']==0)) {
                                     <div style="margin-left:300px;">
                                     <input type="file" name="fileUpload" value="" class="btn btn-theme02" >
                                     <input type="submit" name="up" value="Tải Đáp Án" class="btn btn-theme03" >
-                                    <?php
-                                        if (isset($_POST['up']) and isset($_FILES['fileUpload'])) {
-                                            $b = $_FILES['fileUpload']['name'];
-                                            $b=substr($b,strlen($b)-4,strlen($b));
-                                            if (($_FILES['fileUpload']['error'] > 0) or ($_POST['suggest']=="") or ($b!=".txt") )
-                                                echo "<script>alert('Lỗi..!');</script>";
-                                            else {
-                                                $a=$_POST['suggest'];
-                                                $msg=mysqli_query($con,"insert into challenge(suggest) values('$a')");
-                                                $msg=mysqli_query($con,"select * from challenge where suggest = '$a'");
-                                                $b=mysqli_fetch_array($msg);
-                                                mkdir('challenge/'.$b['id']);
-                                                move_uploaded_file($_FILES['fileUpload']['tmp_name'], 'challenge/'.$b['id'].'/'. $_FILES['fileUpload']['name']);
-                                                echo "<script>alert('Thêm Câu Hỏi Thành Công');</script>";
-                                            }
-                                        }
-                                    ?>
                                     </div>
                                     </form>
                                 </div>

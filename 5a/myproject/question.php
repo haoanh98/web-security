@@ -17,9 +17,8 @@ if(isset($_POST['Submit']) and ($_POST['answer']!="")){
     if ($b==$_POST['answer'])
     {
         $extra='view-answer.php?link='.$path.'/'.$a;
-        $host=$_SERVER['HTTP_HOST'];
-        $uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-        header("location:http://$host$uri/$extra");
+        echo "<script>window.location.href='".$extra."'</script>";
+        exit();
     }
     else{
         echo "<script>alert('ĐÁP ÁN KHÔNG CHÍNH XÁC');</script>";
