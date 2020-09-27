@@ -106,7 +106,7 @@ if (strlen($_SESSION['id']==0)) {
                                   <td><?php echo $row['link'];?></td>
                                   <td><?php echo $row['users'];?></td>
                                   <td>
-                                     <a href="upload/<?php echo $row['link'];?>"> 
+                                     <a href="upload/<?php echo $row['id'].'/'.$row['link'];?>"> 
                                      <button class="btn btn-primary btn-xs"><i class="fa fa-download"></i></button></a>
                                   </td>
                                   <td>
@@ -134,10 +134,13 @@ if (strlen($_SESSION['id']==0)) {
                                             if ($_FILES['fileUpload']['error'] > 0) 
                                                 echo "<script>alert('Lỗi..!');</script>";
                                             else {
-                                                move_uploaded_file($_FILES['fileUpload']['tmp_name'], 'upload/' . $_FILES['fileUpload']['name']);
                                                 $a=$_FILES['fileUpload']['name'];
                                                 $c=$_SESSION['name'];
                                                 $msg=mysqli_query($con,"insert into upload(link,users,type) values('$a','$c','0')");
+                                                $msg=mysqli_query($con,"select * from upload where link = '$a' and users = '$c' and type = '0'");
+                                                $b=mysqli_fetch_array($msg);
+                                                mkdir('upload/'.$b['id']);
+                                                move_uploaded_file($_FILES['fileUpload']['tmp_name'], 'upload/'.$b['id'].'/'.$_FILES['fileUpload']['name']);
                                                 echo "<script>alert('Thêm Bài Tập Thành Công');</script>";
                                             }
                                         }

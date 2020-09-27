@@ -106,7 +106,7 @@ if (strlen($_SESSION['id']==0)) {
                                   <td><?php echo $row['link'];?></td>
                                   <td><?php echo $row['users'];?></td>
                                   <td>
-                                     <a href="upload/<?php echo $row['link'];?>"> 
+                                     <a href="upload/<?php echo $row['id'].'/'.$row['link'];?>"> 
                                      <button class="btn btn-primary btn-xs"><i class="fa fa-download"></i></button></a>
                                   </td>
                               </tr>

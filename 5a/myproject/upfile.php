@@ -98,11 +98,14 @@ if (strlen($_SESSION['id']==0)) {
                                             if ($_FILES['fileUpload']['error'] > 0) 
                                                 echo "<script>alert('Lỗi..!');</script>";
                                             else {
-                                                move_uploaded_file($_FILES['fileUpload']['tmp_name'], 'admin/upload/' . $_FILES['fileUpload']['name']);
                                                 $a=$_FILES['fileUpload']['name'];
                                                 $b=$_GET['id'];
                                                 $c=$_SESSION['name'];
                                                 $msg=mysqli_query($con,"insert into upload(link,ex,users,type) values('$a','$b','$c','1')");
+                                                $msg=mysqli_query($con,"select * from upload where link = '$a' and users = '$c' and type = '1' and ex='$b'");
+                                                $d=mysqli_fetch_array($msg);
+                                                mkdir('admin/upload/'.$d['id']);
+                                                move_uploaded_file($_FILES['fileUpload']['tmp_name'], 'admin/upload/'.$d['id'] .'/'. $_FILES['fileUpload']['name']);
                                                 echo "<script>alert('Thêm Bài Làm Thành Công');</script>";
                                             }
                                         }

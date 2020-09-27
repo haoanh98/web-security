@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th9 25, 2020 lúc 05:45 PM
+-- Thời gian đã tạo: Th9 27, 2020 lúc 02:52 PM
 -- Phiên bản máy phục vụ: 10.4.14-MariaDB
 -- Phiên bản PHP: 7.2.33
 
@@ -79,8 +79,8 @@ CREATE TABLE `upload` (
 --
 
 INSERT INTO `upload` (`id`, `link`, `ex`, `type`, `users`) VALUES
-(17, '1. Combin00_Intro.pdf', '', 0, 'Phương'),
-(18, 'Báo cáo AI.docx', '17', 1, 'Anh Hào');
+(21, 'DeepLearningBook.pdf', '', 0, 'Phương'),
+(25, 'Machine-Learning-cơ-bản.pdf', '21', 1, 'Anh Hào');
 
 -- --------------------------------------------------------
 
@@ -156,7 +156,7 @@ ALTER TABLE `message`
 -- AUTO_INCREMENT cho bảng `upload`
 --
 ALTER TABLE `upload`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
