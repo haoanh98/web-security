@@ -15,9 +15,7 @@ $extra="view-details.php";
 $_SESSION['login']=$_POST['username'];
 $_SESSION['id']=$num['id'];
 $_SESSION['name']=$num['fname'];
-$host=$_SERVER['HTTP_HOST'];
-$uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-header("location:http://$host$uri/$extra");
+echo "<script>window.location.href='".$extra."'</script>";
 exit();
 }
 else
