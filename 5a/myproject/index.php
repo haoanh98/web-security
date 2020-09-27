@@ -24,9 +24,7 @@ else
 {
 echo "<script>alert('Tài Khoản hoặc mật khẩu không chính xác.');</script>";
 $extra="index.php";
-$host  = $_SERVER['HTTP_HOST'];
-$uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-//header("location:http://$host$uri/$extra");
+echo "<script>window.location.href='".$extra."'</script>";
 exit();
 }
 }
