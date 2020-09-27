@@ -11,8 +11,13 @@ if(isset($_POST['Submit']))
 {
 	$content=$_POST['content'];
     $id=intval($_GET['id']);
-$query=mysqli_query($con,"update message set text='$content' where id='$id'");
-echo "<script>alert('Cập Nhật Thành Công');</script>";
+    $query=mysqli_query($con,"update message set text='$content' where id='$id'");
+    $msg=mysqli_query($con,"select * from message where id='$id'");
+    $b=mysqli_fetch_array($msg);
+    $extra ='message.php?id='.$b['id_2'];
+    echo "<script>alert('Cập Nhật Thành Công');</script>";
+    echo "<script>window.location.href='".$extra."'</script>";
+    exit();
 }
 ?>
 
