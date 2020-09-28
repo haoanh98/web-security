@@ -107,6 +107,9 @@ if (strlen($_SESSION['id']==0)) {
                                                 mkdir('admin/upload/'.$d['id']);
                                                 move_uploaded_file($_FILES['fileUpload']['tmp_name'], 'admin/upload/'.$d['id'] .'/'. $_FILES['fileUpload']['name']);
                                                 echo "<script>alert('Thêm Bài Làm Thành Công');</script>";
+                                                $extra = 'ex.php';
+                                                echo "<script>window.location.href='".$extra."'</script>";
+                                                exit();
                                             }
                                         }
                                     ?>

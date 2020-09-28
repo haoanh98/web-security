@@ -53,7 +53,7 @@ exit();
 		            <input type="text" name="username" class="form-control" placeholder="User ID" autofocus>
 		            <br>
 		            <input type="password" name="password" class="form-control" placeholder="Password"><br >
-		            <input  name="login" class="btn btn-theme btn-block" type="submit">
+		            <input  name="login" class="btn btn-theme btn-block" type="submit" value ='ĐĂNG NHẬP'>
 		         
 		        </div>
 		      </form>	  	
