@@ -1,7 +1,7 @@
-<?
+<?php
   include("User.php");
   include("File.php");
-  if( $_POST["username"] && $_POST["birth"] && $_POST["gender"] && $_POST["email"] ) {
+  if( isset($_POST["username"]) && isset($_POST["birth"]) && isset($_POST["gender"]) && isset($_POST["email"]) ) {
     $user = new Users($_POST["username"], $_POST["email"], $_POST["gender"], $_POST["birth"]);
     $base64_out = base64_encode(serialize($user));
   }
@@ -46,8 +46,8 @@
           <button type="submit" class="btn btn-primary">< Submit ></button>
         </form>
         <p id='base64_out'>
-          <?
-            if($base64_out) {
+          <?php
+            if(isset($base64_out)) {
               echo($base64_out);
             }
           ?>
@@ -64,8 +64,8 @@
           <button type="submit" class="btn btn-warning">< Deserialize ></button>
         </form>
         <p id='base64_to_string'>
-          <?
-            if( $_POST["base64"]) {
+          <?php
+            if ( isset($_POST["base64"])) {
               $object = $_POST["base64"];
               echo unserialize(base64_decode($object), ['allowed_classes' => false]);
             }
